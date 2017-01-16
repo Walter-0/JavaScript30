@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Understanding JavaScript's Capture</title>
 </head>
-<body class="bod">
+<body>
 
   <div class="one">
     <div class="two">
@@ -17,11 +17,16 @@
   html {
     box-sizing: border-box;
   }
-  *, *:before, *:after { box-sizing: inherit; }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
 
   div {
-    width:100%;
-    padding:100px;
+    width: 100%;
+    padding: 100px;
   }
 
   .one {
@@ -29,17 +34,23 @@
   }
 
   .two {
-    background:mistyrose;
+    background: mistyrose;
   }
 
   .three {
-    background:coral;
+    background: coral;
   }
 </style>
 
-<button></button>
 <script>
+  const divs = document.querySelectorAll('div');
 
+  function logText(e) {
+    e.stopPropagation(); // stops bubbling
+    console.log(this.classList.value);
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText));
 </script>
 </body>
 </html>
